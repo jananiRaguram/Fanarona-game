@@ -1,25 +1,39 @@
+require './Player'
+
+# enum for player colour
+module Colour
+  WHITE = :w
+  BLACK = :b
+end
+
 class PlayerManager
-    attr_accessor :players, :player_turn
-    
-    def initialize(player_turn)
-        @players = []
-        @player_turn = player_turn
+  attr_accessor :player_one, :player_two, :player_turn
+
+  # what is player turn (Player object or colour), doens't make sense to set player turn when the player is being created
+
+  def initialize(player_colour)
+    @player_one = Player.new
+    @player_two = Player.new
+
+    # set the player who chooses white to player one
+    # 1 is set to colour white
+    if player_colour == 1
+      @player_turn = @player_one
+      @player_one.colour = Colour::WHITE
+      @player_two.colour = Colour::BLACK
+    else
+      @player_turn = @player_two
+      @player_one.colour = Colour::BLACK
+      @player_two.colour = Colour::WHITE
     end
-    
-    def check_end_game
-        # Implement this method to determine if a player has no pieces remaining and return a boolean value
-    end
-    
-    def end_turn
-        check_end_game
-        set_player_turn unless check_end_game
-    end
-    
-    def get_player_turn
-        @player_turn
-    end
-    
-    def set_player_turn(player_turn)
-        @player_turn = player_turn
-    end
+  end
+
+  def end_turn
+    if @player_turn == @player_one
+      @player_turn = @player_two
+     else
+      @player_turn = @player_one
+     end
+  end
+
 end

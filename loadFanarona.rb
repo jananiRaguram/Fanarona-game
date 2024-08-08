@@ -1,0 +1,8 @@
+require './UI.rb' 
+require './HomeScreen.rb' 
+require './GameScreen.rb' 
+require './Game.rb' 
+require './Player.rb' 
+require './Verifier.rb'
+require './Board.rb'
+require './Piece.rb'
